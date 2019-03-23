@@ -33,5 +33,7 @@ public:
   void clearScreen();
   void printMenu();
   void returnToMenu();
+  string printTopLine(string x);
+  string printBottomLine();
 };
 #endif

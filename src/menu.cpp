@@ -27,10 +27,10 @@ void Menu::doMenuOption()
         printMenu();
 
         //reporting that the user has used wrong input
+        cout << printBottomLine() << endl;
         cout << "Invalid number!" << endl;
         cout << "Please enter a valid number from the list:";
     }
-
     setMenuOption(option);
 }
 void Menu::menuOptions()
@@ -75,6 +75,8 @@ void Menu::mainMenu()
         printMenu();
 
         doMenuOption(); // Setting the menu choice from the user
+        cout << endl
+             << printTopLine(vMenuOptions.at(getMenuOption())) << endl;
 
         rt->readFromFile(vMenuOptions.at(getMenuOption()));
         returnToMenu();
@@ -94,7 +96,7 @@ void Menu::clearScreen()
 void Menu::printMenu()
 {
     cout
-        << "**Menu**"
+        << "**Tutorial Lists**"
         << "\n";
 
     int x = 0;
@@ -109,8 +111,37 @@ void Menu::printMenu()
 void Menu::returnToMenu()
 {
     cout << endl
-         << "------------------------------" << endl;
+         << printBottomLine() << endl;
     cout << "Press Enter to return to menu:";
     cin.get();
     cin.get();
+}
+
+string Menu::printTopLine(string x)
+{
+    int tmp = x.length();
+    int y = 40;
+    int t = (y - tmp) / 2;
+    string cool;
+
+    for (int i = 0; i < t; i++)
+    {
+        cool += "-";
+    }
+    cool += x;
+    for (int i = 0; i < t; i++)
+    {
+        cool += "-";
+    }
+    return cool;
+}
+string Menu::printBottomLine()
+{
+    string cool;
+    for (int i = 0; i < 40; i++)
+    {
+        cool += "-";
+    }
+
+    return cool;
 }

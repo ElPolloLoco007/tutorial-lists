@@ -11,7 +11,7 @@ LIBRARIES	:=
 ifeq ($(OS),Windows_NT)
 EXECUTABLE	:= main.exe
 else
-EXECUTABLE	:= main.o
+EXECUTABLE	:= main
 endif
 
 all: $(BIN)/$(EXECUTABLE)
