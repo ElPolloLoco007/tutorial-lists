@@ -18,7 +18,7 @@ void Menu::doMenuOption()
          << "Make your option:";
     int option;
     //checking if its a integer that is pressed, and removing the wrongfully letter
-    while (!(cin >> option) || option >= vMenuOptions.size())
+    while (!(cin >> option) || option >= vTxtFiles.size())
     {
         cin.clear();
         while (cin.get() != '\n')
@@ -44,30 +44,45 @@ void Menu::menuOptions()
     {
         while (entry = readdir(pDIR))
         {
-            if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0)
-                //string tmp = entry->d_name.substr (0,entry->d_name.length()-1);
-                vMenuOptions.push_back(entry->d_name);
-        }
-        closedir(pDIR);
 
-        free(cstr);
+            int i;
+            for (i = 0; entry->d_name[i] != '\0'; i++)
+            {
+            }
+
+            if (entry->d_name[i - 4] == '\056')
+            {
+                vTxtFiles.push_back(entry->d_name);
+            }
+            else
+            {
+                vFolders.push_back(entry->d_name);
+            }
+        }
+
+        //Removing from vector
+        //--------------
+        auto itr = find(vFolders.begin(), vFolders.end(), "..");
+        if (itr != vFolders.end())
+            vFolders.erase(itr);
+
+        auto itr2 = find(vFolders.begin(), vFolders.end(), ".");
+        if (itr2 != vFolders.end())
+            vFolders.erase(itr2);
+        //--------------
+
+        vFiles.reserve(vFolders.size() + vTxtFiles.size()); // preallocate memory
+        vFiles.insert(vFiles.end(), vFolders.begin(), vFolders.end());
+        vFiles.insert(vFiles.end(), vTxtFiles.begin(), vTxtFiles.end());
     }
+    closedir(pDIR);
+
+    free(cstr);
 }
 
 void Menu::mainMenu()
 {
     menuOptions();
-
-    //Removing from vector
-    //--------------
-    auto itr = find(vMenuOptions.begin(), vMenuOptions.end(), "..");
-    if (itr != vMenuOptions.end())
-        vMenuOptions.erase(itr);
-
-    auto itr2 = find(vMenuOptions.begin(), vMenuOptions.end(), ".");
-    if (itr2 != vMenuOptions.end())
-        vMenuOptions.erase(itr2);
-    //--------------
 
     bool again = true;
     do
@@ -76,22 +91,16 @@ void Menu::mainMenu()
 
         doMenuOption(); // Setting the menu choice from the user
         cout << endl
-             << printTopLine(vMenuOptions.at(getMenuOption())) << endl;
+             << printTopLine(vFiles.at(getMenuOption())) << endl;
 
-        rt->readFromFile(vMenuOptions.at(getMenuOption()));
+        rt->readFromFile(vTxtFiles.at(getMenuOption()));
         returnToMenu();
     }
 
     while (again);
 }
 
-void Menu::clearScreen()
-{
-    //Clearing the screen with empty lines
-    int n;
-    for (n = 0; n < 10; n++)
-        cout << ("\n\n\n\n\n\n\n\n\n\n");
-}
+
 
 void Menu::printMenu()
 {
@@ -100,11 +109,18 @@ void Menu::printMenu()
         << "\n";
 
     int x = 0;
-
-    for (auto i : vMenuOptions)
+    for (auto i : vFiles)
     {
-        std::cout << x << "." << i << "\n";
-        x++;
+        if (x < vFolders.size())
+        {
+            std::cout << x << ".- " << i << "\n";
+            x++;
+        }
+        else
+        {
+            std::cout << x << "." << i << "\n";
+            x++;
+        }
     }
 }
 

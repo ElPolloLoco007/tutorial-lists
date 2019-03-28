@@ -18,7 +18,10 @@ using namespace std;
 class Menu
 {
 private:
-  vector<string> vMenuOptions;
+  vector<string> vTxtFiles;
+  vector<string> vFolders;
+  vector<string> vFiles;
+
   int menuOption;
   shared_ptr<ReadTutorials> rt;
 
@@ -30,7 +33,6 @@ public:
   void mainMenu();
   void setMenuOption(int option);
   int getMenuOption() { return menuOption; };
-  void clearScreen();
   void printMenu();
   void returnToMenu();
   string printTopLine(string x);

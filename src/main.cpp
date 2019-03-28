@@ -12,10 +12,10 @@ int main()
 	Menu m;
 	CreateDir cd;
 	ReadTutorials rt;
+	cd.createFolder();
 
 	m.mainMenu();
 
-	cd.createFolder();
 	rt.writeToFile();
 	rt.read_directory();
 	return 0;

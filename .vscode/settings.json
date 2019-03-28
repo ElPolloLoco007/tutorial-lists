@@ -3,7 +3,8 @@
         "iosfwd": "cpp",
         "iostream": "cpp",
         "fstream": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "algorithm": "cpp"
     },
     "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }
