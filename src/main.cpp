@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -16,7 +15,7 @@ int main()
 
 	m.mainMenu();
 
-	rt.writeToFile();
-	rt.read_directory();
+	//rt.writeToFile();
+	//rt.read_directory();
 	return 0;
 }

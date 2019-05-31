@@ -2,6 +2,4 @@
 
 ReadFiles::ReadFiles() {}
 
-ReadFiles::~ReadFiles()
-{
-}
+ReadFiles::~ReadFiles() {}

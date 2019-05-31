@@ -1,10 +1,7 @@
 {
     "files.associations": {
-        "iosfwd": "cpp",
-        "iostream": "cpp",
-        "fstream": "cpp",
-        "memory": "cpp",
-        "algorithm": "cpp"
+        "*.tpp": "cpp"
     },
-    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "terminal.integrated.shell.windows": "cmd.exe"
 }
